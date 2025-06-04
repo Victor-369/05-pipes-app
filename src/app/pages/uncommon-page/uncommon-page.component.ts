@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { CardComponent } from '../../components/card/card.component';
-import { I18nPluralPipe, I18nSelectPipe, JsonPipe, SlicePipe, UpperCasePipe } from '@angular/common';
+import { AsyncPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValuePipe, SlicePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
 
 const client1 = {
   name: 'Fernando',
@@ -19,7 +19,17 @@ const client2 = {
 
 @Component({
   selector: 'app-uncommon-page',
-  imports: [CardComponent, I18nSelectPipe, I18nPluralPipe, SlicePipe, JsonPipe, UpperCasePipe],
+  imports: [
+    CardComponent,
+    I18nSelectPipe,
+    I18nPluralPipe,
+    SlicePipe,
+    JsonPipe,
+    UpperCasePipe,
+    KeyValuePipe,
+    TitleCasePipe,
+    AsyncPipe,
+  ],
   templateUrl: './uncommon-page.component.html'
 })
 // Es default porque se utilizará por defecto eventualmente. "Para poder importar facilmente de las rutas padre"
@@ -65,4 +75,23 @@ export default class UncommonPageComponent {
   deleteClient() {
     this.clients.update((prev) => prev.slice(1));
   };
+
+
+  /************ KeyValue Pipe ************/
+  profile = {
+    name: 'Fernando',
+    age: 36,
+    address: 'Ottawa, Canada'
+  }
+
+
+  /************ Async Pipe ************/
+  promiseValue: Promise<string> = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      //resolve('Tenemos data en la promesa');
+      reject('Tenemos un error en la data');
+      console.log('Promesa finalizada');
+    }, 3500);
+  });
+
 }

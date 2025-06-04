@@ -44,4 +44,26 @@
     <p class="text-primary">{{ clients().join(", ") | json }} </p>
     <p class="text-primary">{{ clients().join(", ") | json  | uppercase }} </p>
   </app-card>
+
+  <app-card title="KeyValuePipe">
+    <!-- <pre>{{ profile | keyvalue | json }}</pre> -->
+    <ul>
+      @for (item of profile | keyvalue; track $index) {
+        <li>
+          <strong class="text-primary">{{ item.key | titlecase }}: </strong>
+          <span>{{ item.value }}</span>
+        </li>
+       }
+    </ul>
+  </app-card>
+
+  <app-card title="AsyncPipe">
+    <!-- <p>{{ promiseValue | async }}</p> -->
+
+    @if (promiseValue | async; as value) {
+      <p class="text-primary">{{ value }}</p>
+    } @else {
+      <p class="text-accent">Espere por favor...</p>
+    }
+  </app-card>
 </div>
