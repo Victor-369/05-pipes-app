@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { CardComponent } from '../../components/card/card.component';
 import { AsyncPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValuePipe, SlicePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
+import { interval, map, tap } from 'rxjs';
 
 const client1 = {
   name: 'Fernando',
@@ -94,4 +95,11 @@ export default class UncommonPageComponent {
     }, 3500);
   });
 
+
+  // Con observables. La subscripción es auotmática, al igual que la desuscripción
+  myObservableTimer = interval(2000)
+    .pipe(
+      map((value) => value + 1),
+      // Para disparar efectos secundarios
+      tap((value) => console.log('tap:', value)));
 }
