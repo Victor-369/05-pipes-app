@@ -1,10 +1,15 @@
 import { Component, signal } from '@angular/core';
 import { ToggleCasePipe } from '../../pipes/toggle-case.pipe';
+import { heroes } from '../../data/heroes.data';
+import { CanFlyPipe } from '../../pipes/can-fly.pipe';
+import { heroColorPipe } from '../../pipes/hero-color.pipe';
 
 @Component({
   selector: 'app-custom-page',
   imports: [
     ToggleCasePipe,
+    CanFlyPipe,
+    heroColorPipe
   ],
   templateUrl: './custom-page.component.html'
 })
@@ -16,4 +21,6 @@ export default class CustomPageComponent {
   toggleButton() {
     this.upperCase.set(!this.upperCase());
   }
+
+  heroes = signal(heroes);
 }
