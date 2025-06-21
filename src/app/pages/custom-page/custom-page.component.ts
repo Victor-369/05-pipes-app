@@ -6,6 +6,8 @@ import { heroColorPipe } from '../../pipes/hero-color.pipe';
 import { HeroTextColorPipe } from '../../pipes/hero-text-color.pipe';
 import { TitleCasePipe } from '@angular/common';
 import { HeroCreatorPipe } from '../../pipes/hero-creator.pipe';
+import { HeroSortByPipe } from '../../pipes/hero-sort-by.pipe';
+import { Hero } from '../../interfaces/hero.interface';
 
 @Component({
   selector: 'app-custom-page',
@@ -16,6 +18,7 @@ import { HeroCreatorPipe } from '../../pipes/hero-creator.pipe';
     HeroTextColorPipe,
     TitleCasePipe,
     HeroCreatorPipe,
+    HeroSortByPipe,
   ],
   templateUrl: './custom-page.component.html'
 })
@@ -29,4 +32,7 @@ export default class CustomPageComponent {
   }
 
   heroes = signal(heroes);
+
+  // keyof: valor de alguna llave que tenga el héroe o nulo
+  sortBy = signal<keyof Hero | null>(null);
 }
